@@ -7,6 +7,6 @@ namespace ShareT.Service
 {
     public class BaseService//:DbRepository<DbTestEntity_1Context>
     {
-        
+        //xiugai:
     }
 }

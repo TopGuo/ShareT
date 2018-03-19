@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShareT.Common\ShareT.Common.csproj" />
+    <ProjectReference Include="..\ShareT.Data\ShareT.Data.csproj" />
+  </ItemGroup>
+
+</Project>

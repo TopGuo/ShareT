@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.EFCore.SqlServer" Version="2.0.3.25" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ShareT.Common\ShareT.Common.csproj" />
     <ProjectReference Include="..\ShareT.Data\ShareT.Data.csproj" />
   </ItemGroup>

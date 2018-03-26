@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ShareT.Data;
+using ShareT.Web.TestDemo._AbstractFactory;
 
 namespace ShareT.Web
 {
@@ -16,12 +17,17 @@ namespace ShareT.Web
     {
         public static void Main(string[] args)
         {
+            #region 抽象工厂
+            //AbstractFactory abstractFactory = new ConcreteFactory1();
+            //Client client = new Client(abstractFactory);
+            //client.Run();
+            #endregion
+
             var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
                 try
                 {
                     var context1 = services.GetRequiredService<DbTestEntity_1Context>();
@@ -34,7 +40,6 @@ namespace ShareT.Web
                     //初始化系统测试数据的时候报错，请联系管理员。
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(e, "初始化系统测试数据的时候报错，请联系管理员。");
-
                 }
 
             }

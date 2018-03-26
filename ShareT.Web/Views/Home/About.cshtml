@@ -1,7 +1,215 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highcharts Example</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <select class="selectType">
+        <option value="3600000">请选择</option>
+        <option value="900000">一刻</option>
+        <option value="1800000">半小时</option>
+        <option value="3600000">一小时</option>
+    </select>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-<p>Use this area to provide additional information.</p>
+    <script type="text/javascript">
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+
+        /*  3600000 // 小时
+            900000  // 刻
+            1800000 // 按小时*/
+        //
+        function createTick(number) {
+            var arr = [0];
+            console.log("arr"+arr);
+            while (arr[arr.length - 1] < 86400000) {
+                console.log("arrA" + arr);
+                arr.push(number * arr.length)
+            }
+            return arr
+        }
+
+        var newDate, dataName, initData;
+
+        resetChartVars(new Date);
+
+        function resetChartVars(date) {
+            newDate = startOfDay(date); // 数据起点的第一天开始时间 00：00
+            dataName = Highcharts.dateFormat('%Y-%m-%d', newDate);
+
+            initData = localStorage[dataName] ? JSON.parse(localStorage[dataName]) : [];
+
+        }
+
+        function startOfDay(date) {
+            var d = new Date(date);
+            return new Date('' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()).getTime();
+        }
+
+
+        // 模拟数据，name 为显示的x轴标签， 日期格式 或者 毫秒数 ， y 则为数据点的值
+        //
+        function ajax(chart) {
+            //alert(chart);
+            if (!chart) return;
+            // jQuery.ajax('url', function (data) {
+
+            var pointDate = new Date(); // new Date(data.time);
+
+            var pointDateStart = startOfDay(pointDate);
+
+            // 数据点与本地数据库不是同一天的数据
+
+            if (pointDateStart != newDate) {
+                resetChartVars(pointDate);
+                chart.series[0].update({
+                    data: []
+                });
+            }
+
+            addPoint(
+                // 第0条线
+                chart.series[0],
+                [pointDate - pointDateStart, Math.random()]
+                /* 之前的结构为 {  name:new Date() - newDate , y :Math.random()}*/
+            );
+
+            // 保存数据到本地数据库
+            localStorage[dataName] = JSON.stringify(initData);
+            // })
+
+        }
+
+        //
+
+        function addPoint(series, point) {
+            var prevPoint = series.data[series.data.length - 1];
+            // 判断不与上次时间相同
+            if (!prevPoint || prevPoint[0] != point[0]) {
+                series.addPoint(point);
+
+            }
+        }
+
+        //选择按钮
+        function changeChart(number) {
+            //
+            var x = createTick(number);
+
+            var last = x.length - 1;
+
+            if (x[last] == 86400000) x[last] = x[last] - 1;
+
+            chart.xAxis[0].update({
+                tickPositions: x
+            });
+
+            chart.series[1].update({
+                data: [
+                    [x[0], 0],
+                    [x[x.length - 1], 0]
+                ]
+            });
+        }
+
+        var chart;
+
+        //初始化
+        function createChart() {
+            if (chart) return;
+
+            chart = Highcharts.chart('container', {
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    events: {
+                        load: function () {
+                            // set up the updating of the chart each second
+                            // 轮询查询数据，现在是1秒请求一次
+                            var _this = this
+                            console.log(_this);
+                            setInterval(function () {
+                                //异步请求数据
+                                ajax(_this)
+                            }, 1000);
+                        }
+                    }
+                },
+                xAxis: {
+                    step: 5,
+                    tickPositions: [],
+                    labels: {
+
+                        // 格式化x轴label
+                        formatter: function (e) {
+                            return Highcharts.dateFormat('%H:%M:%S', this.value + newDate)
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.point.x + newDate) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                series: [
+                    // 绘制一条线
+                    {
+                        name: 'Random data',
+                        // connectNulls: true,
+                        // TODO 断线
+                        connectNulls: false,
+                        data: initData
+                    }, {
+                        // 这条series不能删除， 为了把图表撑开
+                        enableMouseTracking: false,
+                        color: 'transparent',
+                        data: []
+                    }
+                ]
+            });
+
+        }
+
+
+        function submit() {
+            createChart();
+            changeChart($('.selectType').val());
+
+        }
+
+        $('.selectType').on('change', submit);
+    </script>
+</body>
+</html>

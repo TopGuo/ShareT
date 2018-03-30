@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShareT.Common;
 using ShareT.Data;
+using ShareT.Service;
 
 namespace ShareT.Web
 {
@@ -25,12 +26,12 @@ namespace ShareT.Web
         public void ConfigureServices(IServiceCollection services)
         {
             new MvcHelper().InitConfiguration(Configuration);
-            //services.AddDbContext<ShareTContext>(option => option.UseSqlServer(MvcHelper.DbConnection));
-
             services.AddDbContext<DbTestEntity_1Context>(option => option.UseSqlServer(MvcHelper.DbConnectionT1));
             services.AddDbContext<DbTestEntity_2Context>(option => option.UseSqlServer(MvcHelper.DbConnectionT2));
+            services.AddScoped<PersonInfoesService, PersonInfoesService>();
+            services.AddScoped<StudentsInfoService, StudentsInfoService>();
             services.AddMvc();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +53,9 @@ namespace ShareT.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=PersonInfoes}/{action=Index}/{id?}");
             });
-            
+
         }
     }
 }

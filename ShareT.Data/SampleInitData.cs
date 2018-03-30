@@ -36,6 +36,10 @@ namespace ShareT.Data
 
         public static void InitEf2Data(DbTestEntity_2Context context)
         {
+            if (context.PersonInfo.Any())
+            {
+                return;
+            }
             var PersonInfos = new[]
             {
                 new PersonInfo {Name = "学生", Age=12},

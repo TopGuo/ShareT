@@ -13,5 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ShareT.Common\ShareT.Common.csproj" />
     <ProjectReference Include="..\ShareT.Data\ShareT.Data.csproj" />
+    <ProjectReference Include="..\ShareT.Service\ShareT.Service.csproj" />
   </ItemGroup>
 </Project>

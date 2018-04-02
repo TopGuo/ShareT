@@ -30,6 +30,7 @@ namespace ShareT.Web
             services.AddDbContext<DbTestEntity_2Context>(option => option.UseSqlServer(MvcHelper.DbConnectionT2));
             services.AddScoped<PersonInfoesService, PersonInfoesService>();
             services.AddScoped<StudentsInfoService, StudentsInfoService>();
+            services.AddMemoryCache();
             services.AddMvc();
 
         }
@@ -48,6 +49,7 @@ namespace ShareT.Web
             }
 
             app.UseStaticFiles();
+
             //app.UseMvc();
             app.UseMvc(routes =>
             {

@@ -18,7 +18,7 @@ namespace ShareT.Service
 
         public T _context { get; set; }
 
-
+        
         /// <summary>
         /// 只能是唯一记录 多记录引发异常
         /// </summary>

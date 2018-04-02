@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using ShareT.Common.CacheHelper;
 using ShareT.Data;
 using ShareT.Data.DbTestEntity_2;
 using ShareT.Service;
@@ -13,22 +15,55 @@ namespace ShareT.Web.Controllers
 {
     public class PersonInfoesController : Controller
     {
-        public PersonInfoesController(PersonInfoesService personInfoesService,StudentsInfoService studentsInfoService)
+        public PersonInfoesController(PersonInfoesService personInfoesService,StudentsInfoService studentsInfoService, IMemoryCache memoryCache)
         {
             _personInfoesService = personInfoesService;
             _studentsInfoService = studentsInfoService;
+            _cache = memoryCache;
         }
 
         protected PersonInfoesService _personInfoesService { get; set; }
         protected StudentsInfoService _studentsInfoService { get; set; }
+        private IMemoryCache _cache;
 
+        #region 内存缓存-- 添加/获取缓存
+        public IActionResult CacheGetOrCreate()
+        {
+            var cacheEntry = _cache.GetOrCreate(CacheKeys.DependentCTS, entry =>
+            {
+                entry.SlidingExpiration = TimeSpan.FromSeconds(30);
+                return DateTime.Now;
+            });
+
+            return View("Cache", cacheEntry);
+        } 
+        #endregion
 
         // GET: PersonInfoes
         public IActionResult Index()
         {
             var query = _personInfoesService.GetAllPersonInfo();//.Where<PersonInfo>(t=>true);
-            var data = _studentsInfoService.GetOneStrdentInfo();
-            ViewBag.Data = data;
+            
+            //
+            string cacheEntry;
+
+            // Look for cache key.
+            if (!_cache.TryGetValue(CacheKeys.Entry, out cacheEntry))
+            {
+                var data = _studentsInfoService.GetOneStrdentInfo();
+                
+                // Key not in cache, so get data.
+                cacheEntry = data.Name+ DateTime.Now.ToString();
+
+                // Set cache options.
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(30));
+
+                // Save data in cache.
+                _cache.Set(CacheKeys.Entry, cacheEntry, cacheEntryOptions);
+            }
+            ViewBag.Data = cacheEntry;
             return View(query);
         }
 

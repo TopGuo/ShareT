@@ -13,7 +13,7 @@ namespace ShareT.Service
         {
             _context = dbTestEntity_1Context;
         }
-
+        
         public StudentInfo GetOneStrdentInfo()
         {
             var query = base.Where<StudentInfo>(t => true).FirstOrDefault();

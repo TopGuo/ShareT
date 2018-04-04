@@ -56,5 +56,18 @@ namespace ShareT.Common
                 return connection;
             }
         }
+
+        public static string DbConnectionMongo
+        {
+            get
+            {
+                string connection = _config.GetConnectionString("DbContextion_Mongo");
+                if (string.IsNullOrEmpty(connection))
+                {
+                    throw new Exception(" empty connection string");
+                }
+                return connection;
+            }
+        }
     }
 }

@@ -11,11 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.Common", "ShareT.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.Service", "ShareT.Service\ShareT.Service.csproj", "{40B189C7-4FF6-4E03-A38C-30E5955F58A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareT.Redis", "ShareT.Redis\ShareT.Redis.csproj", "{92461BA5-C3CC-41F0-B32F-F2217E054C07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.RedisCon", "ShareT.RedisCon\ShareT.RedisCon.csproj", "{C7C88383-FD5C-4FD7-BD26-EB415A63E952}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareT.RedisCon", "ShareT.RedisCon\ShareT.RedisCon.csproj", "{C7C88383-FD5C-4FD7-BD26-EB415A63E952}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareT.MongoDBCon", "ShareT.MongoDBCon\ShareT.MongoDBCon.csproj", "{2460E89D-AC1A-4122-AF36-B75766CD19CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.MongoDBCon", "ShareT.MongoDBCon\ShareT.MongoDBCon.csproj", "{2460E89D-AC1A-4122-AF36-B75766CD19CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +37,6 @@ Global
 		{40B189C7-4FF6-4E03-A38C-30E5955F58A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B189C7-4FF6-4E03-A38C-30E5955F58A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B189C7-4FF6-4E03-A38C-30E5955F58A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92461BA5-C3CC-41F0-B32F-F2217E054C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92461BA5-C3CC-41F0-B32F-F2217E054C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92461BA5-C3CC-41F0-B32F-F2217E054C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92461BA5-C3CC-41F0-B32F-F2217E054C07}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7C88383-FD5C-4FD7-BD26-EB415A63E952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7C88383-FD5C-4FD7-BD26-EB415A63E952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7C88383-FD5C-4FD7-BD26-EB415A63E952}.Release|Any CPU.ActiveCfg = Release|Any CPU

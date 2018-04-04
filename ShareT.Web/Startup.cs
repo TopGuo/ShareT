@@ -28,6 +28,9 @@ namespace ShareT.Web
             new MvcHelper().InitConfiguration(Configuration);
             services.AddDbContext<DbTestEntity_1Context>(option => option.UseSqlServer(MvcHelper.DbConnectionT1));
             services.AddDbContext<DbTestEntity_2Context>(option => option.UseSqlServer(MvcHelper.DbConnectionT2));
+
+            //services.AddDbContext<MongoContext>(option => option.UseSqlServer(MvcHelper.DbConnectionMongo));
+
             services.AddScoped<PersonInfoesService, PersonInfoesService>();
             services.AddScoped<StudentsInfoService, StudentsInfoService>();
             services.AddMemoryCache();

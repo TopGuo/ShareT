@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShareT.Common;
 using ShareT.Data;
+using ShareT.Mongo;
 using ShareT.Service;
 
 namespace ShareT.Web
@@ -33,6 +34,11 @@ namespace ShareT.Web
 
             services.AddScoped<PersonInfoesService, PersonInfoesService>();
             services.AddScoped<StudentsInfoService, StudentsInfoService>();
+
+            //Ìí¼Ó mongodb
+            services.AddMongoContext<DemoMongoContext>(options=>options.UseMongo(Configuration.GetConnectionString("MongoConnection")));
+
+            //Ìí¼ÓÄÚ´æ»º´æ
             services.AddMemoryCache();
             services.AddMvc();
 

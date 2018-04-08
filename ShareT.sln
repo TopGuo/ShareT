@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.RedisCon", "ShareT.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareT.MongoDBCon", "ShareT.MongoDBCon\ShareT.MongoDBCon.csproj", "{2460E89D-AC1A-4122-AF36-B75766CD19CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareT.Mongo", "ShareT.Mongo\ShareT.Mongo.csproj", "{05F5DEF2-60FD-40D9-9B45-3EF151BB2BD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{2460E89D-AC1A-4122-AF36-B75766CD19CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2460E89D-AC1A-4122-AF36-B75766CD19CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2460E89D-AC1A-4122-AF36-B75766CD19CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F5DEF2-60FD-40D9-9B45-3EF151BB2BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F5DEF2-60FD-40D9-9B45-3EF151BB2BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F5DEF2-60FD-40D9-9B45-3EF151BB2BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F5DEF2-60FD-40D9-9B45-3EF151BB2BD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

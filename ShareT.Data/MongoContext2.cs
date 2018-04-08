@@ -6,9 +6,9 @@ using System.Text;
 
 namespace ShareT.Data
 {
-    public class MongoContext: DefaultDbContext
+    public class MongoContext2: DefaultDbContext
     {
-        public MongoContext(DbContextOptions<MongoContext> options) : base(options)
+        public MongoContext2(DbContextOptions<MongoContext2> options) : base(options)
         {
 
         }

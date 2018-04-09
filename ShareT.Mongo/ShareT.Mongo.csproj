@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Description>MongoDB Resporitory.</Description>
+    <Copyright>ShareCar</Copyright>
+    <PackageReleaseNotes>MongoDB Resporitory.v1.0.0.0</PackageReleaseNotes>
+    <PackageTags>ShareTMongoDB</PackageTags>
+    <PackageId>ShareTMongoDB</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

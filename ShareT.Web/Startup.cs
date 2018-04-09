@@ -32,8 +32,14 @@ namespace ShareT.Web
 
             //services.AddDbContext<MongoContext>(option => option.UseSqlServer(MvcHelper.DbConnectionMongo));
 
+
+
+
             services.AddScoped<PersonInfoesService, PersonInfoesService>();
             services.AddScoped<StudentsInfoService, StudentsInfoService>();
+            //Ìí¼Ó identity service 
+            services.AddIdentityServer().AddDeveloperSigningCredential();
+
 
             //Ìí¼Ó mongodb
             services.AddMongoContext<DemoMongoContext>(options=>options.UseMongo(Configuration.GetConnectionString("MongoConnection")));
@@ -59,6 +65,8 @@ namespace ShareT.Web
 
             app.UseStaticFiles();
 
+            //
+            app.UseIdentityServer();
             //app.UseMvc();
             app.UseMvc(routes =>
             {

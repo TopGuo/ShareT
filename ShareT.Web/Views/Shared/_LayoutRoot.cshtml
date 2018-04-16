@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="gb2312" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] -Beta鸟窝开源 @ShareT.Common.Constant.CompanyName</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/public.css" />
+    <script type="text/javascript">
+        @*window.webPath = "@HttpServerUtility.WebVirtualPath";*@
+        
+        //window.webPath = HttpContext.Current.Request.Path;
+
+    </script>
+
+    @RenderSection("Rootstyles", required: false)
+</head>
+<body style="height:100%" ng-app="angularApp" ng-controller="angularCtrl">
+    @RenderBody()
+    <footer>
+        <div class="container" style="width:100%;">
+            <p style="text-align:center;">&copy; @DateTime.Now.Year -@ShareT.Common.Constant.CompanyName</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/lib/lodash/dist/lodash.min.js"></script>
+    <script src="~/lib/moment/min/moment.min.js"></script>
+    <script src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/lib/angular-ueditor/dist/ueditor.config.js"></script>
+    <script src="~/lib/angular-ueditor/dist/ueditor.js"></script>
+    <script src="~/lib/angular-ueditor/dist/angular-ueditor.js"></script>
+    <script src="~/lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/js/ng-csv.min.js"></script>
+
+    <script src="~/js/public.min.js" asp-append-version="false"></script>
+    @RenderSection("RootScripts", required: false)
+</body>
+</html>
